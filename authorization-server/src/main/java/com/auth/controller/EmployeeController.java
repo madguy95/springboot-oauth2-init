@@ -24,8 +24,8 @@ public class EmployeeController {
 
     @GetMapping("/employee")
     @ResponseBody
-    public Optional<Employee> getEmployee(@RequestParam String email) {
-        return employees.stream().filter(x -> x.getEmail().equals(email)).findAny();
+    public Optional<Employee> getEmployee(@RequestParam(required = false) String email) {
+        return Optional.of(new Employee("abcc@gmail.com", "asdasda"));
     }
 
     @PostMapping(value = "/employee", consumes = MediaType.APPLICATION_JSON_VALUE)

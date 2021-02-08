@@ -36,9 +36,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers("/login").permitAll()
 		.antMatchers("/oauth/token/revokeById/**").permitAll()
 		.antMatchers("/tokens/**").permitAll()
+		.antMatchers("/h2-console/**").permitAll()
 		.anyRequest().authenticated()
 		.and().formLogin().permitAll()
-		.and().csrf().disable();
+		.and().csrf().disable().headers().frameOptions().disable();
 		// @formatter:on
     }
 

@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Import;
 import com.common.config.CorsFilter;
 
 @SpringBootApplication
-@Import(value = { CorsFilter.class })
+//@Import(value = { CorsFilter.class })
 public class ResourceServerApplication extends SpringBootServletInitializer {
 
 	public static void main(String[] args) {

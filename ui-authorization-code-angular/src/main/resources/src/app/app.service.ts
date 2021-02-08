@@ -10,6 +10,11 @@ export class Foo {
     public id: number,
     public name: string) { }
 } 
+export class Employee {
+  constructor(
+    public email: string,
+    public name: string) { }
+} 
 
 @Injectable()
 export class AppService {
@@ -42,7 +47,7 @@ export class AppService {
   }
 
   getResource(resourceUrl) : Observable<any>{
-    var headers = new HttpHeaders({'Content-type': 'application/x-www-form-urlencoded; charset=utf-8', 'Authorization': 'Bearer '+Cookie.get('access_token')});
+    var headers = new HttpHeaders({'Content-type': 'application/json; charset=utf-8', 'Authorization': 'Bearer '+Cookie.get('access_token')});
     return this._http.get(resourceUrl, { headers: headers })
                    .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
   }

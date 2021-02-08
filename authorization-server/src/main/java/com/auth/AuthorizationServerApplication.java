@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Import;
 
 import com.common.config.CorsFilter;
 
-@SpringBootApplication(scanBasePackages = "com.baeldung")
+@SpringBootApplication
 @Import(value = { CorsFilter.class })
 public class AuthorizationServerApplication extends SpringBootServletInitializer {
 
