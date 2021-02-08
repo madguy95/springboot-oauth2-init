@@ -32,7 +32,7 @@ export class AppService {
     params.append('code',code);
 
     let headers = new HttpHeaders({'Content-type': 'application/x-www-form-urlencoded; charset=utf-8', 'Authorization': 'Basic '+btoa(this.clientId+":secret")});
-     this._http.post('http://localhost:8081/spring-security-oauth-server/oauth/token', params.toString(), { headers: headers })
+     this._http.post('http://localhost:8081/oauth-server/oauth/token', params.toString(), { headers: headers })
     .subscribe(
       data => this.saveToken(data),
       err => alert('Invalid Credentials')

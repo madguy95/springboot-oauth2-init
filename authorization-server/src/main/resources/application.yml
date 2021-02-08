@@ -1,0 +1,16 @@
+server:
+  servlet:
+    context-path: /oauth-server
+  port: 8081
+spring:
+  h2:
+    console: 
+      enabled: true
+
+  thymeleaf:
+    prefix: classpath:/views/
+    suffix: .html
+    cache: false
+      
+#spring.profiles.active=dev
+#logging.level.org.springframework=DEBUG

@@ -28,9 +28,9 @@ export class FooComponent {
     
     public employee = new Employee('a','sample foo');
     
-    private foosUrl = 'http://localhost:8082/spring-security-oauth-resource/foos/';  
+    private foosUrl = 'http://localhost:8082/oauth-server/foos/';  
     
-    private employeeURL = 'http://localhost:8081/spring-security-oauth-server/employee';  
+    private employeeURL = 'http://localhost:8081/oauth-server/employee';  
 
     constructor(private _service:AppService) {}
 

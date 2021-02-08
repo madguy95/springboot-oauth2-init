@@ -2,5 +2,9 @@ server.servlet.context-path=/spring-security-oauth-server
 server.port=8081
 spring.h2.console.enabled=true
 #spring.profiles.active=dev
-
+spring:
+	thymeleaf:
+    	prefix: classpath:/views/
+    	suffix: .html
+    	cache: false
 #logging.level.org.springframework=DEBUG
