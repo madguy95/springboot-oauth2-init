@@ -9,11 +9,13 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+//@EnableGlobalMethodSecurity(prePostEnabled = true)
+//@EnableWebSecurity(debug = false)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
@@ -39,6 +41,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // @formatter:off
 		http.authorizeRequests()
 			.antMatchers("/login").permitAll()
+			.antMatchers("/oauth/authorize").permitAll()
 			.antMatchers("/oauth/token/revokeById/**").permitAll()
 			.antMatchers(HttpMethod.OPTIONS, "/oauth/token").permitAll()
 			.antMatchers("/tokens/**").permitAll()
@@ -50,18 +53,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		// @formatter:on
     }
 
-	/**
-	 * Let Security ignore these urls, do not intercept
-	 *
-	 * @param
-	 * @throws Exception
-	 */
-    @Override
-    public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers
-                ("/swagger-ui.html/**", "/webjars/**",
-                        "/swagger-resources/**", "/v2/api-docs/**",
-                        "/swagger-resources/configuration/ui/**", "/swagger-resources/configuration/security/**",
-                        "/images/**");
-    }
+//	/**
+//	 * Let Security ignore these urls, do not intercept
+//	 *
+//	 * @param
+//	 * @throws Exception
+//	 */
+//    @Override
+//    public void configure(WebSecurity web) throws Exception {
+//        web.ignoring().antMatchers
+//                ("/swagger-ui.html/**", "/webjars/**",
+//                        "/swagger-resources/**", "/v2/api-docs/**",
+//                        "/swagger-resources/configuration/ui/**",
+//                        "/swagger-resources/configuration/security/**",
+//                        "/images/**");
+//    }
 }
