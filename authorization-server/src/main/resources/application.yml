@@ -11,6 +11,8 @@ spring:
     prefix: classpath:/views/
     suffix: .html
     cache: false
-      
+logging:
+  level: 
+    root: INFO
 #spring.profiles.active=dev
 #logging.level.org.springframework=DEBUG

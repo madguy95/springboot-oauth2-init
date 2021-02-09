@@ -6,8 +6,8 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 
-//@EnableResourceServer
-//@Configuration
+@EnableResourceServer
+@Configuration
 //@Profile("mvc")
 // This isn't the main/standard Resource Server of the project (that's in a different module)
 // This is the Resource Server for the Testing OAuth2 with Spring MVC article: http://www.baeldung.com/oauth-api-testing-with-spring-mvc
@@ -22,11 +22,13 @@ public class OAuth2ResourceServerConfig extends ResourceServerConfigurerAdapter 
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http
-        	.antMatcher("/employee/**")
+        	.antMatcher("/employee**")
 	        .authorizeRequests()
 	        .antMatchers("/login").permitAll()
-	        .antMatchers("/employee").hasRole("ADMIN")
-	        .anyRequest().authenticated();
+	        .antMatchers("/employee").hasRole("USER")
+	        .anyRequest().authenticated()
+	        .and().csrf().disable()
+			.headers().disable();;
     }
 
 }

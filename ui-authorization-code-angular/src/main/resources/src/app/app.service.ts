@@ -57,7 +57,28 @@ export class AppService {
   } 
 
   logout() {
-    Cookie.delete('access_token');
-    window.location.reload();
+	let headers = new HttpHeaders({'Content-type': 'application/json; charset=utf-8'});
+    //  this._http.delete('http://localhost:8082/auth-server/token/revoke', { headers: headers })
+    // .subscribe(
+    //   data => {
+    //     Cookie.delete('access_token');
+    //     window.location.reload();
+    //   },
+    //   err => alert('Invalid Credentials')
+    // ); 
+
+    this._http.post('http://localhost:8081/oauth-server/oauth/token/revokeById/' + Cookie.get('access_token'), {}, { headers: headers })
+        .subscribe(
+          data => {
+            Cookie.delete('access_token');
+            window.location.reload();
+          },
+          err => {
+            Cookie.delete('access_token');
+            Cookie.delete('refresh_token');
+            window.location.reload();
+            console.log(err)
+          }
+        ); 
   }
 }

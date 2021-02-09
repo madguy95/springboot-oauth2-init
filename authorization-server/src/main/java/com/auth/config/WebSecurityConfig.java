@@ -12,9 +12,10 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
-//@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 //@EnableWebSecurity(debug = false)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
@@ -39,7 +40,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
         // @formatter:off
-		http.authorizeRequests()
+		http
+		.addFilterBefore(new RequestBodyReaderAuthenticationFilter(authenticationManagerBean()), UsernamePasswordAuthenticationFilter.class)
+		.authorizeRequests()
 			.antMatchers("/login").permitAll()
 			.antMatchers("/oauth/authorize").permitAll()
 			.antMatchers("/oauth/token/revokeById/**").permitAll()
@@ -49,7 +52,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.anyRequest().authenticated()
 			.and()
 			.formLogin().loginPage("/login").permitAll()
-			.and().csrf().disable();
+			.and().logout()
+			.and().csrf().disable()
+			.headers().disable();
 		// @formatter:on
     }
 
